@@ -184,6 +184,12 @@
   width: 4.5rem;
 }
 
+.container-left-top-bar {
+  @apply flex items-center h-6 cursor-pointer bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 rounded-lg hover:dark:bg-slate-500;
+
+  width: 32rem;
+}
+
 // container for time and icons
 .container-timer {
   @apply flex items-center space-x-2 p-1.5 dark:bg-gray-600 bg-gray-200 rounded-full h-5;
