@@ -4,9 +4,13 @@ import { Select, SelectItem } from "@nextui-org/react";
 
 import { difficulties, statuses } from "../table/data/data";
 import problemJson from "../table/data/tasks.json";
+import { Task } from "../table/data/schema";
 
-const ProblemList: FC = () => {
-  // TODO check how to get problem list
+type problemListProps = {
+  problemListData?: any
+}
+
+const ProblemList: FC<problemListProps> = ({ problemListData }) => {
 
   return (
     <>

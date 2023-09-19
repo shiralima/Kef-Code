@@ -51,9 +51,8 @@ const SolutionSection: React.FC<SolutionSectionProps> = ({ workSpaceData, proble
     const { page } = useGenerationStoree()
     const [sortBy, setSort] = useState('likes')
     const { development } = useDevelop()
-
     const { data: soltionSectionData, refetch, isFetching } = useQuery({
-        queryKey: [page],
+        queryKey: ["solution", problemId, page, sortBy],
         queryFn: async () => {
             if (development) return null
             const query = `/api/getSolutions?problemId=${problemId}&page=${page}&sortBy=${sortBy}`
@@ -65,7 +64,7 @@ const SolutionSection: React.FC<SolutionSectionProps> = ({ workSpaceData, proble
 
     const sortData: any = (e: any) => {
         setSort(e)
-        refetch()
+        // refetch()
     }
     return (
         <div className="overflow-y-auto scrollbar-hide">
@@ -99,9 +98,9 @@ const SolutionSection: React.FC<SolutionSectionProps> = ({ workSpaceData, proble
                                                 </SelectContent>
                                             </Select>
                                         </div>
-                                        {isFetching ? <p>טוען</p> : <Feed data={soltionSectionData} />}
+                                        {isFetching ? <h4 className="flex justify-center mb-14">טוען</h4> : <Feed data={soltionSectionData} />}
                                     </div>
-                                    : <p>טוען..</p>}
+                                    : <h4 className="flex justify-center">טוען</h4>}
                                 {soltionSectionData && workSpaceData && <Pagination totalPages={Math.ceil(workSpaceData.totalSubmissions / 5)} />}
                             </div>}
 
@@ -113,7 +112,7 @@ const SolutionSection: React.FC<SolutionSectionProps> = ({ workSpaceData, proble
                     </div>
                     <div className="px-5">
                         {development ? solution : (workSpaceData && workSpaceData.solutionArticle)
-                            ? parse(workSpaceData.solutionArticle) : null}
+                            ? parse(workSpaceData.solutionArticle) : <h3 className="flex justify-center">אין פתרון עדיין</h3>}
                         {/* <Accordion className="mt-8" title="דיון">
                             <CommentsSection problemId={1} comments={[]} userId={userId} />
                         </Accordion> */}

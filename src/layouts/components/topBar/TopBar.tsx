@@ -14,6 +14,28 @@ import { useDevelop } from "@/store/store";
 import axios from "axios";
 import Link from "next/link";
 import ProblemList from "./ProblemList";
+import { BsList } from "react-icons/bs";
+
+const mockData = [
+  {
+    id: 1,
+    title: "שאלה במטריצות",
+    difficulty: "קשה",
+    status: "FINISH",
+  },
+  {
+    id: 6,
+    title: "אי רציפות",
+    difficulty: "קל",
+    status: "BEGIN",
+  },
+  {
+    id: 24,
+    title: "משפט לופיטל",
+    difficulty: "בינוני",
+    status: "STUCK",
+  },
+];
 
 const TopBar = () => {
   const pathname = usePathname().split("/");
@@ -23,7 +45,7 @@ const TopBar = () => {
   const { development } = useDevelop();
 
   const { data, isLoading: isLoadingData } = useQuery({
-    queryKey: ["topbar", chapter],
+    queryKey: ["topbar", course, chapter],
     queryFn: async () => {
       if (development) return null;
       const query = `/api/getTopBar?course=${course}&chapter=${chapter}&problemId=${problemId}`;
@@ -31,7 +53,6 @@ const TopBar = () => {
       return data;
     },
   });
-  console.log('data: ', data);
 
   return (
     <section>
@@ -46,6 +67,18 @@ const TopBar = () => {
               <BiSolidChevronLeftCircle size={23} className="ml-1" />
             )}
             <ProblemList />
+
+            {/* <div className="rounded hover:bg-gray-400 bg-gray-400">
+              {data ? (
+                <button onClick={()=>openSelect(data)}>
+                  <BsList />
+                </button>
+              ) : (
+                <button onClick={()=>openSelect(mockData)}>
+                  <BsList />
+                </button>
+              )}
+            </div> */}
             {data ? (
               <Link href={data.nextLink}>
                 <BiSolidChevronRightCircle size={23} className="mr-1 ml-4" />

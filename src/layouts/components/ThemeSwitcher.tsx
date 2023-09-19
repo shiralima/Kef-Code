@@ -1,15 +1,16 @@
 "use client";
 
 import config from "@/config/config.json";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useTheme as useThemee } from "next-themes";
+import { useEffect, useState, useContext } from "react";
+import { ColorModeContext } from '@/partials/ChildrenProviders';
 
 const ThemeSwitcher = ({ className }: { className: string }) => {
   const { theme_switcher } = config.settings;
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useThemee();
+  const colorMode = useContext(ColorModeContext);
   useEffect(() => setMounted(true), []);
-
   return (
     <>
       {theme_switcher && (
@@ -20,10 +21,10 @@ const ThemeSwitcher = ({ className }: { className: string }) => {
             defaultChecked={
               mounted && (theme === "dark" || resolvedTheme === "dark")
             }
-            onClick={() =>
+            onClick={() =>{
               setTheme(
                 theme === "dark" || resolvedTheme === "dark" ? "light" : "dark"
-              )
+              ), colorMode.toggleColorMode()}
             }
           />
           <label htmlFor="theme-switcher">

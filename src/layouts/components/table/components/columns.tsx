@@ -31,36 +31,11 @@ export const columns: ColumnDef<Task>[] = [
         return null;
       }
 
-      // const { data, isLoading }
-      // = useQuery({
-      //   queryFn: async () => {
-      //     // const { data } = await axios.get('/api/getproblems?q=')
-      //     const course = "algebra1"
-      //     const chapter = "1"
-      //     const { data } = await axios.get(`/api/getproblems?course=${course}&chapter=${chapter}`)
-      //     return data as Data
-      //   },
-      // })
-
-      // const className = getColumnView().map(({ columnName, viewOption }) => {
-      //   let colorClass = 'color-priority-low'
-      //   if (priority.value === 'medium') {
-      //     colorClass = 'color-priority-medium'
-      //   }
-      //   else if (priority.value === 'high') {
-      //     colorClass = 'color-priority-high'
-      //   }
-      //   if (columnName === ColumnsNameEnum.STATUS && viewOption === ViewOptionEnum.HIDE) {
-      //     return `ml-16 ${colorClass}`
-      //   }
-      //   return colorClass
-      // }).join(' ')
-
         let colorClass = 'color-difficulty-low'
-        if (difficulty.value === 'MEDIUM') {
+        if (difficulty.value === 'בינוני') {
           colorClass = 'color-difficulty-medium'
         }
-        else if (difficulty.value === 'HARD') {
+        else if (difficulty.value === 'קשה') {
           colorClass = 'color-difficulty-high'
         }
 
@@ -78,9 +53,9 @@ export const columns: ColumnDef<Task>[] = [
     },
     sortingFn: (rowA, rowB, columId) => {
       const statusOrder = {
-        "HARD": 3,
-        "MEDIUM": 2,
-        "EASY": 1
+        "קשה": 3,
+        "בינוני": 2,
+        "קל": 1
       }
       const valueA = rowA.getValue(columId) as keyof typeof statusOrder
       const valueB = rowB.getValue(columId) as keyof typeof statusOrder

@@ -4,9 +4,7 @@ import React, { useEffect, useState } from "react";
 import { FiRefreshCcw } from "react-icons/fi";
 import { TbPlayerStop } from 'react-icons/tb';
 
-type TimerProps = {};
-
-const Timer: React.FC<TimerProps> = () => {
+const Timer: React.FC = () => {
 	const [showTimer, setShowTimer] = useState<boolean>(false);
 	const [time, setTime] = useState<number>(0);
 	const [stopTimer, setStopTimer] = useState<boolean>(false);
