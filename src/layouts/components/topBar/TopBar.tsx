@@ -14,7 +14,6 @@ import { useDevelop } from "@/store/store";
 import axios from "axios";
 import Link from "next/link";
 import ProblemList from "./ProblemList";
-import { BsList } from "react-icons/bs";
 
 const mockData = [
   {
